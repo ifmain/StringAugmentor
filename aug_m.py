@@ -1,7 +1,7 @@
 import random
 
 def augment_string(input_string):
-    # Универсальный leet-словарь, включающий символы из всех поддерживаемых языковых групп
+    # Universal leet dictionary, including symbols from all supported language groups
     leet_dict = {
         'a': '4', 'b': '8', 'c': '(', 'e': '3', 'g': '9', 'i': '1', 'o': '0', 's': '5', 't': '7', 'z': '2',
         'ä': '43', 'ö': '03', 'ü': 'v3', 'å': '00', 'ø': 'ø', 'æ': '4e', 'ç': 'c', 'ñ': '~n', 'ý': 'y', 'ß': 'B', 'õ': '0~', 'ħ': '#',
@@ -10,17 +10,17 @@ def augment_string(input_string):
         'ф': 'qp', 'х': 'x', 'ц': 'ц', 'ч': '4', 'ш': 'w', 'щ': 'щ', 'ъ': '`', 'ы': 'bl', 'ь': 'b', 'э': '3', 'ю': '10', 'я': '9'
     }
 
-    # Функция для leet-трансформации
+    # Function for leet transformation
     def to_leet(word):
         return ''.join(leet_dict.get(char.lower(), char) for char in word)
     
-    # 1. Перевёрнутая строка
+    # 1. Reversed string
     reversed_string = input_string[::-1]
     
-    # 2. Строка, где все слова склеены
+    # 2. String with all words concatenated
     concatenated_string = ''.join(input_string.split())
     
-    # 3. Строка, где рандомные 2-3 буквы "съедены"
+    # 3. String where random 2-3 letters are "eaten"
     def remove_random_chars(word):
         if len(word) > 3:
             num_to_remove = random.randint(2, 3)
@@ -30,7 +30,7 @@ def augment_string(input_string):
     
     removed_chars_string = ' '.join(remove_random_chars(word) for word in input_string.split())
     
-    # 4. Строка, где 2-3 буквы заменены на спецсимволы
+    # 4. String where 2-3 letters are replaced with special characters
     special_chars = ['*', '#', '@', '&', '!', '%', '$', '(', ')', '-', '+', '=', '?', '>', '<', '/', ':', ';', '[', ']', '{', '}', '|', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
     
     def replace_random_chars(word):
@@ -42,22 +42,22 @@ def augment_string(input_string):
     
     replaced_chars_string = ' '.join(replace_random_chars(word) for word in input_string.split())
     
-    # 5. Каждая буква рандомно мелко или крупно
+    # 5. Each letter randomly lowercase or uppercase
     def random_case(word):
         return ''.join(random.choice([char.lower(), char.upper()]) for char in word)
     
     random_case_string = ' '.join(random_case(word) for word in input_string.split())
     
-    # 6. Между каждой буквой рандомный спецсимвол или цифра
+    # 6. Insert random special character or number between each letter
     def insert_random_chars(word):
         return ''.join(char + random.choice(special_chars) for char in word) + random.choice(special_chars)
     
     inserted_chars_string = ' '.join(insert_random_chars(word) for word in input_string.split())
     
-    # 7. Закодированная в leet
+    # 7. Encoded in leet
     leet_string = ' '.join(to_leet(word) for word in input_string.split())
     
-    # 8. Соседние слова переставлены местами
+    # 8. Adjacent words swapped
     words = input_string.split()
     swapped_words = words[:]
     for i in range(0, len(swapped_words) - 1, 2):
@@ -65,7 +65,7 @@ def augment_string(input_string):
     
     swapped_string = ' '.join(swapped_words)
     
-    # Возвращаем все результаты в виде словаря
+    # Return all results as a dictionary
     return {
         "reversed": reversed_string,
         "concatenated": concatenated_string,
@@ -77,7 +77,7 @@ def augment_string(input_string):
         "swapped": swapped_string
     }
 
-# Пример использования
+# Example usage
 input_str = "Hello мир! Привіт мир! Älä usko; ñándõ hęll."
 results = augment_string(input_str)
 for key, value in results.items():
